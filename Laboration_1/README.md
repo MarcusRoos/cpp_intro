@@ -1,9 +1,46 @@
 # Laboration 1
+//Av: Marcus Roos
+//Uppgift: Laboration 1 - Palindrom
+//Datum: 2019-11-13
 
-## Environment & Tools
+## Utvecklingsmiljö & Verktyg
+Windows 10 64bitars.
+IDE: CLion.
+Miljö: MinGW 5.2
+CMake: mingw32 make 3.15.3
+C++ compiler: g++
+Debugger: MinGW GDB 7.6.1
+Git: Git 2.23.0.windows.1
 
-## Purpose
+## Syfte
+Laborationen bygger på tidigare kunskaper som övningsuppgifterna har lagt en grund för. Även fast varje syntax är klar så är problemet i
+programmering att lära sig överkomma hinder och lösa alla problem som hamnar i ens väg. För den här laborationen fanns det inget färdigt
+verktyg som kunde vända på en input och skriva ut det bakvänt utan de mest grundläggande verktyget fick användas för att lösa problemet som uppstod.
 
-## Procedures
 
-## Discussion
+## Genomförande
+För att skriva ett tal baklänges i C++ så måste vi ta reda på vad det sista talet i ledet är och sedan arbeta oss mot början (slutet).
+Då modulo ger resten av en division så kommer ett tal vars värde inte är delbart med hundra (Ett palindrom kan inte vara jämnt delbart med hundra),
+så kommer resten att vara den sista siffran i ledet om modulo 10 används, t.ex. så ger 456 787 654 % 10 = 456 78 765.4, endast int används så detta tal kommer
+att ignorera decimalen och avrundas till 456 787 65. Modulo ser däremot inte decimalen utan ser endast resten som ett heltal, och detta heltal lagras i en annan variabel.
+Eftersom beräkningen fortskrider så kommer talet ha betats av från slutet till början och tillslut kommer det bakvända talet vara lagrat i en annan variabel (RevNum i mitt fall).
+Om RevNum är samma som InNum (Numret som skrevs in ibörjan) så är talet ett paidrom, annars är det inte.
+
+Problem uppstod då endast tal mellan 10000 och 99999 var accepterade, brukaren skulle få möjligheten att köra om programmet, samt att endast siffror fick matas in.
+Hjälp gavs verifikation av siffror, men det andra fick lösas eftersom, jag hade gjort en while-loop till en början men upptäckte att det inte gick, eller var betydligt krångligare
+att köra om programmet på det sättet, därför murade jag in allt i en do-while loop, deklarerade variabeln char och använde det för att verifiera om användaren ville köra om.
+För att kolla hur stort talet var så använde jag ytterligare en while loop i den tidigare while-loopen. Jag har testat programmet grundligt och bett närstående testa det åt mig
+och ingen har hittills hittat en bug.
+
+10000 var ett speciellt fall, även om mitt program fungerade för att tolka det som 1 baklänges så ville jag ha kvar nollorna då det är tydligare när man använder programmet,
+för att lösa det så använde jag mig av en if-sats. Det var egentligen inget problem utan att jag ville representera nollorna på något sätt.
+
+## Diskussion
+Jag lärde mig något enormt, jag har gjort övningsuppgifterna men då har det (på gott och ont), funnits andras material att kolla, jag har försökt att inte använda deras
+material men det resulterar i att jag läser vad de har gjort och sedan implementerar mina egna lösningar. Det utvecklar min färdighet trots allt, på laborationen
+fanns det inget annat material att kolla på så då fick jag lösa uppgifterna helt på egen hand. Även om det tog runt 8 timmar att få det att fungera så som jag vill så är det
+inte alls för bedrövligt tycker jag. Jag lärde mig mycket om modulo, även om jag har vetat vad den gör och hur den fungera så byggs en annan uppfattning när man arbetar
+med den så mycket som jag gjorde i denna uppgift, jag litade verkligen helt på modulo för att lösa uppgiften. Jag har svårt att få programmet att fungear så som jag vill,
+if och else satser är bland de enklaste satserna men ändå är det där jag fastnade, jag la alldeles för mycket tid på att försöka upprepa koden genom att väljaren fick
+skriva in sitt val i sista if/else-satsen. Övningarna är det som har fått mig att ens kunna göra den här uppgiften, jag var helt grön på programmering innan.
+Jag tyckte om själva uppgiften, allt lades ut klart och det uppstod inga konstigheter över huvudtaget.
