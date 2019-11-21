@@ -2,6 +2,9 @@
 //Av: Marcus Roos
 //Uppgift: Laboration 1 - Palindrom
 //Datum: 2019-11-13
+/*Beskrivning av programmet: Programmet kommer att be användaren mata in ett fem siffrigt tal, sedan kommer detta tal att kastas om och räknas upp bakifrån, om talet
+ * är detsamma framifrån som bakifrån så är det ett palindrom vilket är programmets uppgift. För att lösa detta används modulo operatorn för att släppa loss
+ * den sista siffran i talet som skrivs in. Användaren har även möjlighet att upprepa programmet tills den så väljer att avsluta det genom att skriva N eller n.*/
 
 ## Utvecklingsmiljö & Verktyg
 Windows 10 64bitars.
@@ -44,3 +47,13 @@ med den så mycket som jag gjorde i denna uppgift, jag litade verkligen helt på
 if och else satser är bland de enklaste satserna men ändå är det där jag fastnade, jag la alldeles för mycket tid på att försöka upprepa koden genom att väljaren fick
 skriva in sitt val i sista if/else-satsen. Övningarna är det som har fått mig att ens kunna göra den här uppgiften, jag var helt grön på programmering innan.
 Jag tyckte om själva uppgiften, allt lades ut klart och det uppstod inga konstigheter över huvudtaget.
+
+^Det blev en ändning på den där sista meningen. Jag visste från början inte att vi endast var begränsade till att använda sånt som vi har arbetat med tidigare, jag använde 
+mig av "goto" för att strukturera upp mitt program, samt att jag ville ändra till string för att kontrollera input då programmet ska köras om eller avbrytas. detta behövde 
+jag ändra vilket la till 10 extra rader med kod i mitt program. Sån information hade varit trevlig att få innan laborationen hann göras klart, däremot är det förståeligt då 
+det nyligen blev uppdaterat och det är enkelt att missa. Sen är goto inte det bästa att använda då koden blir väldigt fram och tillbaka och otydlig, så det var snarare bättre 
+än dåligt att vi blev begränsade. Jag hade väldigt svårt att begränsa input då programmet ska upprepas utan hjälp av strings men löste det med cin.clear, annars så loopades loopen
+så pass många gånger som antal bokstäver man skrev in.
+
+Överlag, en rolig uppgift, blev verkligen en problemlösning och det är sånt som är kul. Jag hoppas verkligen att programmet fungerar som det ska, jag har försökt att förstöra det 
+men det finns alltid någonting man missar.
