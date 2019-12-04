@@ -7,7 +7,6 @@
 
 // Parser for main argument
 std::string mainArgumentParser(int argc, char* argv[]);
-
 bool authenticateUser(std::string value);
 std::string decryptPassword(std::string pass);
 
