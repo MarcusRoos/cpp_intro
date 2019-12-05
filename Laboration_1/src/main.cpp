@@ -3,7 +3,7 @@
 //Datum: 2019-11-13
 /*Beskrivning av programmet: Programmet kommer att be användaren mata in ett fem siffrigt tal, sedan kommer detta tal att kastas om och räknas upp bakifrån, om talet
  * är detsamma framifrån som bakifrån så är det ett palindrom vilket är programmets uppgift. För att lösa detta används modulo operatorn för att släppa loss
- * den sista siffran i talet som skrivs in. Användaren har även möjlighet att upprepa programmet tills den så väljer att avsluta det genom att skriva N eller n.*/ 
+ * den sista siffran i talet som skrivs in. Användaren har även möjlighet att upprepa programmet tills den så väljer att avsluta det genom att skriva N eller n.*/
 
 #include <iostream>
 #include <limits>

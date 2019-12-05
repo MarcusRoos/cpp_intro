@@ -38,7 +38,7 @@ måste värdet från ena funktionen skickas vidare till nästa, processeras, och
 skickas tillbaka för att bekräfta att rätt inloggningsinformation har angivits.
 
 ## Discussion
-Ibörjan av uppgiften så visste jag inte riktigt hur jag skulle lösa krypteringen.
+Ibörjan av uppgiften så visste jag inte riktigt hur jag skulle lösa krypteringen. 
 Jag tänkte att själva krypteringen med de olika nycklarna blir relativt simpel,
 och för att få in nollorna så använder jag mig av ett index. Jag tänkte då
 först utföra krypteringen för ROT7 och ROT9, sedan för att lokalisera vokalerna
