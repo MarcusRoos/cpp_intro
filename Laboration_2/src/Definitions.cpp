@@ -39,8 +39,8 @@ string decryptPassword(string pass) {
 
     int encryptIndex = 0;
     for (int i = 0; i < password.length(); i++, encryptIndex++){
-        for (int j=0; j<VOWELS.length(); j++){
-            if (password[i] == VOWELS[j]){
+        for (char j : VOWELS){
+            if (password[i] == j){
                 decrypted.insert(encryptIndex, 1, '0');
                 decrypted.insert(encryptIndex + 2, +1, '0');
                 encryptIndex += 2;
@@ -77,7 +77,7 @@ string decryptPassword(string pass) {
             i++;
         }
     }
-    decrypt.erase(decrypt.size()-1); //Tar bort en whitespace.
+    decrypt.erase(decrypt.size()-1); //Tar bort en whitespace, hittar ingen snyggare lösning... än.
     return decrypt;
 
 }
