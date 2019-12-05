@@ -49,7 +49,7 @@ Jag ändrade strategi och bestämde mig istället för att sätta in nollorna p�
 en gång och sedan göra själva krypteringen. För att åstadkomma det så valde jag
 att ignorera så fort en nolla fanns, jag visste ju då att den inte ska ändras. Därefter
 hoppar programmet över ett steg och går vidare till nästa bokstav och utför sedan krypteringen.
-
+ 
 Jag hade problem med whitespace men löste det genom att ta bort sista karaktären från
 den krypterade strängen. Jag ska försöka förfina programmet, men just nu fungerar
 det som det ska. Jag tyckte det var svårt att få krypteringen att fungera på 
