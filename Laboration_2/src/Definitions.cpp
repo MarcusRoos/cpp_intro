@@ -39,10 +39,10 @@ bool authenticateUser(string value) {
 string decryptPassword(string pass) {
     const int ROT7 = 7, ROT9 = 9;
     const string VOWELS = "AEIOUYaeiouy";
+
     string deCrypt, passWord;
     passWord = pass;
     deCrypt = pass;
-
     int encryptIndex = 0;
     // använder index för att gå igenom hela lösenordets längd.
     for (int i = 0; i < passWord.length(); i++, encryptIndex++) {
@@ -59,9 +59,9 @@ string decryptPassword(string pass) {
             }
         }
     }
+
     int j = 0;
     string deCrypted;
-
     // Iteration så länge i är mindre är lösenordets längd.
     for (int i = 0; i < pass.length(); i++) {
         // Om nuvarande karaktär i lösenordet +7 rotation är jämt, använd ROT7.
@@ -95,7 +95,6 @@ string decryptPassword(string pass) {
             i++;
         }
     }
-
     // Tar bort en whitespace, hittar ingen snyggare lösning... än.
     deCrypted.erase(deCrypted.size() - 1);
     return deCrypted;
