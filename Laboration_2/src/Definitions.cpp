@@ -18,20 +18,19 @@ bool authenticateUser(string value) {
     const string USERNAME = "Kalle";
     const string PASSWORD = "i0J0u0j0u0J0Zys0r0{";
     bool authPassed = false;
-    string username, password;
+    string userName, passWord;
 
     // särar på lösenordet och användarnamnet, lagrar i substrings.
-    password = value.substr(value.find(',') + 1);
+    passWord = value.substr(value.find(',') + 1);
     // särar på lösenordet och användarnamnet, lagrar i substring.
-    username = value.erase(value.find(',')), password.length();
+    userName = value.erase(value.find(',')), passWord.length();
     // kallar funktionen decryptPassword med lagrade värdet av password.
-    string pass = decryptPassword(password);
+    string pass = decryptPassword(passWord);
 
     // om funktionens returvärde stämmer överens, ge autoPassed sant.
-    if (pass == PASSWORD && username == USERNAME) {
+    if (pass == PASSWORD && userName == USERNAME) {
         authPassed = true;
     }
-    cout << endl << pass << endl;
     return authPassed;
 }
 
