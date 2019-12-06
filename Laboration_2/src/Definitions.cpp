@@ -22,9 +22,11 @@ bool authenticateUser(string value) {
 
     // särar på lösenordet och användarnamnet, lagrar i substrings.
     passWord = value.substr(value.find(',') + 1);
+
     // särar på lösenordet och användarnamnet, lagrar i substring.
     userName = value.erase(value.find(',')), passWord.length();
-    // kallar funktionen decryptPassword med lagrade värdet av password.
+
+    // kallar funktionen decryptPassword med lagrade värdet av passWord.
     string pass = decryptPassword(passWord);
 
     // om funktionens returvärde stämmer överens, ge autoPassed sant.
@@ -35,22 +37,21 @@ bool authenticateUser(string value) {
 }
 
 string decryptPassword(string pass) {
-    const int ROT7 = 7,
-            ROT9 = 9;
+    const int ROT7 = 7, ROT9 = 9;
     const string VOWELS = "AEIOUYaeiouy";
-    string decrypt, password, decrypted;
-    password = pass;
-    decrypt = pass;
+    string deCrypt, passWord;
+    passWord = pass;
+    deCrypt = pass;
 
     int encryptIndex = 0;
     // använder index för att gå igenom hela lösenordets längd.
-    for (int i = 0; i < password.length(); i++, encryptIndex++) {
- /* använder nested for-loop för att gå igenom varje karaktär
- * lagrad i VOWELS, söker igenom varje karaktär i lösenordet.*/
+    for (int i = 0; i < passWord.length(); i++, encryptIndex++) {
+        /* använder nested for-loop för att gå igenom varje karaktär
+        * lagrad i VOWELS, söker igenom varje karaktär i lösenordet.*/
         for (char j: VOWELS) {
-            if (password[i] == j) {
-                decrypt.insert(encryptIndex, 1, '0');
-                decrypt.insert(encryptIndex + 2, +1, '0');
+            if (passWord[i] == j) {
+                deCrypt.insert(encryptIndex, 1, '0');
+                deCrypt.insert(encryptIndex + 2, +1, '0');
                 /* Lägger till två i indexet då 2 nollor har lagts till, annars
                  * går den inte igenom hela lösenordet. */
                 encryptIndex += 2;
@@ -59,40 +60,43 @@ string decryptPassword(string pass) {
         }
     }
     int j = 0;
+    string deCrypted;
+
     // Iteration så länge i är mindre är lösenordets längd.
     for (int i = 0; i < pass.length(); i++) {
-        int k = 0, l = 0;
         // Om nuvarande karaktär i lösenordet +7 rotation är jämt, använd ROT7.
-        if ((decrypt[j] + ROT7) % 2 == 0) {
-            decrypted += decrypt[j] + ROT7;
+        if ((deCrypt[j] + ROT7) % 2 == 0) {
+            deCrypted += deCrypt[j] + ROT7;
             j++;
         } else {
             // Om en nolla uppstår, hoppa över genom att öka j med ett.
-                if (decrypt[j] == '0') {
-                    decrypted += (decrypt[j]);
-                    j++;
-                }
+            if (deCrypt[j] == '0') {
+                deCrypted += (deCrypt[j]);
+                j++;
+            }
+            int k = 0, l = 0;
             // Använd ROT7 en gång, fortsätt sedan till ROT9.
-            while (k < 1) {
-                decrypted += (decrypt[j] + ROT7);
+            while (k != 1) {
+                deCrypted += (deCrypt[j] + ROT7);
                 j++;
                 k++;
             }
             // Om en nolla uppstår, hoppa över genom att öka j med ett.
-                if (decrypt[j] == '0') {
-                    decrypted += (decrypt[j]);
-                    j++;
-                }
-            while (l < 1) {
+            if (deCrypt[j] == '0') {
+                deCrypted += (deCrypt[j]);
+                j++;
+            }
+            while (l != 1) {
                 // Använd ROT9 en gång, fortsätt sedan till ROT7.
-                decrypted += (decrypt[j] + ROT9);
+                deCrypted += (deCrypt[j] + ROT9);
                 j++;
                 l++;
             }
             i++;
         }
     }
+
     // Tar bort en whitespace, hittar ingen snyggare lösning... än.
-    decrypted.erase(decrypted.size() - 1);
-    return decrypted;
+    deCrypted.erase(deCrypted.size() - 1);
+    return deCrypted;
 }
