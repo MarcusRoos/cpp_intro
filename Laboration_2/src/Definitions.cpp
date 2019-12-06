@@ -33,16 +33,16 @@ bool authenticateUser(string value) {
 string decryptPassword(string pass) {
     const int ROT7 = 7, ROT9 = 9;
     const string VOWELS = "AEIOUYaeiouy";
-    string decrypted, password, decrypt;
+    string decrypt, password, decrypted;
     password = pass;
-    decrypted = pass;
+    decrypt = pass;
 
     int encryptIndex = 0;
     for (int i = 0; i < password.length(); i++, encryptIndex++){
         for (char j : VOWELS){
             if (password[i] == j){
-                decrypted.insert(encryptIndex, 1, '0');
-                decrypted.insert(encryptIndex + 2, +1, '0');
+                decrypt.insert(encryptIndex, 1, '0');
+                decrypt.insert(encryptIndex + 2, +1, '0');
                 encryptIndex += 2;
                 break;
             }
@@ -51,33 +51,33 @@ string decryptPassword(string pass) {
 
     int j=0;
     for (int i=0; i<pass.length(); i++){
-        if((decrypted[j]+ROT7) %2==0) {
-            decrypt += decrypted[j] + ROT7;
+        if((decrypt[j]+ROT7) %2==0) {
+            decrypted += decrypt[j] + ROT7;
             j++;
             goto here;
         }
         else{
-            if (decrypted[j] == '0'){
-                decrypt += int(decrypted[j]);
+            if (decrypt[j] == '0'){
+                decrypted += int(decrypt[j]);
                 j++;
             }
             for (int k=0; k < 1; k++) {
-                decrypt += int(decrypted[j] + ROT7);
+                decrypted += int(decrypt[j] + ROT7);
                 j++;
             }
-            if (decrypted[j] == '0'){
-                decrypt += int(decrypted[j]);
+            if (decrypt[j] == '0'){
+                decrypted += int(decrypt[j]);
                 j++;
             }
             here:
             for (int k=0; k < 1; k++) {
-                decrypt += int(decrypted[j] + ROT9);
+                decrypted += int(decrypt[j] + ROT9);
                 j++;
             }
             i++;
         }
     }
-    decrypt.erase(decrypt.size()-1); //Tar bort en whitespace, hittar ingen snyggare lösning... än.
-    return decrypt;
+    decrypted.erase(decrypted.size()-1); //Tar bort en whitespace, hittar ingen snyggare lösning... än.
+    return decrypted;
 
 }
