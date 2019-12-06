@@ -22,13 +22,10 @@ bool authenticateUser(string value) {
 
     // särar på lösenordet och användarnamnet, lagrar i substrings.
     passWord = value.substr(value.find(',') + 1);
-
     // särar på lösenordet och användarnamnet, lagrar i substring.
     userName = value.erase(value.find(',')), passWord.length();
-
     // kallar funktionen decryptPassword med lagrade värdet av passWord.
     string pass = decryptPassword(passWord);
-
     // om funktionens returvärde stämmer överens, ge autoPassed sant.
     if (pass == PASSWORD && userName == USERNAME) {
         authPassed = true;
@@ -39,7 +36,6 @@ bool authenticateUser(string value) {
 string decryptPassword(string pass) {
     const int ROT7 = 7, ROT9 = 9;
     const string VOWELS = "AEIOUYaeiouy";
-
     string deCrypt, passWord;
     passWord = pass;
     deCrypt = pass;
@@ -59,7 +55,6 @@ string decryptPassword(string pass) {
             }
         }
     }
-
     int j = 0;
     string deCrypted;
     // Iteration så länge i är mindre är lösenordets längd.
@@ -68,31 +63,29 @@ string decryptPassword(string pass) {
         if ((deCrypt[j] + ROT7) % 2 == 0) {
             deCrypted += deCrypt[j] + ROT7;
             j++;
-        } else {
+        }
+        else {
             // Om en nolla uppstår, hoppa över genom att öka j med ett.
             if (deCrypt[j] == '0') {
                 deCrypted += (deCrypt[j]);
                 j++;
             }
-            int k = 0, l = 0;
+            int k = 0;
             // Använd ROT7 en gång, fortsätt sedan till ROT9.
-            while (k != 1) {
+            while (k < 1) {
                 deCrypted += (deCrypt[j] + ROT7);
-                j++;
-                k++;
+                j++, k++;
             }
             // Om en nolla uppstår, hoppa över genom att öka j med ett.
             if (deCrypt[j] == '0') {
                 deCrypted += (deCrypt[j]);
                 j++;
             }
-            while (l != 1) {
+            while (k < 2) {
                 // Använd ROT9 en gång, fortsätt sedan till ROT7.
                 deCrypted += (deCrypt[j] + ROT9);
-                j++;
-                l++;
+                j++, k++, i++;
             }
-            i++;
         }
     }
     // Tar bort en whitespace, hittar ingen snyggare lösning... än.
