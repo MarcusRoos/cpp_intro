@@ -8,6 +8,8 @@
 #include <iomanip>
 #include <fstream>
 
+using namespace std;
+
 long_type fibonacciIteration(size_t nthNumber);
 long_type fibonacciRecursion(size_t nthNumber);
 std::vector<Stats> fibonacciTimer(size_t nthNumber);
