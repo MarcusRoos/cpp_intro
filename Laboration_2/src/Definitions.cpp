@@ -42,8 +42,8 @@ string decryptPassword(string pass) {
     int encryptIndex = 0;
     // använder index för att gå igenom hela lösenordets längd.
     for (int i = 0; i < passWord.length(); i++, encryptIndex++) {
-        /* använder nested for-loop för att gå igenom varje karaktär
-        * lagrad i VOWELS, söker igenom varje karaktär i lösenordet.*/
+        /* använder nested for-loop för att gå igenom varje tecken
+        * lagrad i VOWELS, söker igenom varje tecken i lösenordet.*/
         for (char j: VOWELS) {
             if (passWord[i] == j) {
                 deCrypt.insert(encryptIndex, 1, '0');
@@ -59,7 +59,7 @@ string decryptPassword(string pass) {
     string deCrypted;
     // Iteration så länge i är mindre är lösenordets längd.
     for (int i = 0; i < pass.length(); i++) {
-        // Om nuvarande karaktär i lösenordet +7 rotation är jämt, använd ROT7.
+        // Om nuvarande tecken i lösenordet +7 rotation är jämt, använd ROT7.
         if ((deCrypt[j] + ROT7) % 2 == 0) {
             deCrypted += deCrypt[j] + ROT7;
             j++;
