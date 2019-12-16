@@ -71,7 +71,7 @@ size_t subMenu(){
 }
 
 std::vector<Stats>fibonacciTimer(size_t nthNumber){
-    Stats recursion, iteration;
+    Stats recursion=Stats(), iteration=Stats();
     size_t nthTemp = nthNumber, nth=0;
     string type;
     auto timeStartR = std::chrono::high_resolution_clock::now();
@@ -79,7 +79,7 @@ std::vector<Stats>fibonacciTimer(size_t nthNumber){
     do{
         nth = fibonacciRecursion(nthTemp);
         recursion.values.push_back(nth);
-        recursion.type="recursion";
+        recursion.type="Recursion";
         if (i==5){
             cout << setw(5) << left << "Recursions " << nthTemp << "'th value: " << setw(10) << right << nth << endl;
             i=0;
@@ -87,14 +87,15 @@ std::vector<Stats>fibonacciTimer(size_t nthNumber){
         nthTemp--, i++;
     }while(nth!=0);
     auto timeEndR = std::chrono::high_resolution_clock::now();
-    recursion.millisec = std::chrono::duration_cast<std::chrono::milliseconds>(timeEndR - timeStartR ).count();
+    long_type durationR = std::chrono::duration_cast<std::chrono::microseconds>(timeEndR - timeStartR ).count();
+    recursion.microsec = durationR;
     nthTemp=nthNumber;
     auto timeStartI = std::chrono::high_resolution_clock::now();
     i=5;
     do{
         nth = fibonacciIteration(nthTemp);
-        recursion.values.push_back(nth);
-        recursion.type="recursion";
+        iteration.values.push_back(nth);
+        iteration.type="Iteration";
         if (i==5){
             cout << setw(5) << left << "Iterations " << nthTemp << "'th value: " << setw(10) << right << nth << endl;
             i=0;
@@ -102,9 +103,16 @@ std::vector<Stats>fibonacciTimer(size_t nthNumber){
         nthTemp--, i++;
     }while(nth!=0);
     auto timeEndI = std::chrono::high_resolution_clock::now();
-    iteration.millisec = std::chrono::duration_cast<std::chrono::milliseconds>(timeEndI - timeStartI ).count();
-    cout << "Recursion took: " << recursion.millisec << " Milliseconds" << endl;
-    cout << "Iteration took: " << iteration.millisec << " Milliseconds" << endl;
+    long_type durationI = std::chrono::duration_cast<std::chrono::microseconds>(timeEndI - timeStartI ).count();
+    iteration.nanosec = durationI*1000;
+    iteration.microsec = durationI;
+    iteration.millisec = durationI/1000;
+    iteration.sec = (double)durationI/1000000;
+
+    cout << right << setw(30) << "Nanosecs" << setw(20) << "Microsecs" << setw(20) << "Millisecs" << setw(20) << "Seconds" << endl;
+    cout << recursion.type <<":"<< right << setw(20) << recursion.nanosec << setw(20) << recursion.microsec << setw(20) << recursion.millisec << setw(20) << recursion.sec << endl;
+    cout << iteration.type <<":"<< right << setw(20) << iteration.nanosec << setw(20) << iteration.microsec << setw(20) << iteration.millisec << setw(20) << iteration.sec << endl;
+
 
     return {iteration, recursion};
 }
