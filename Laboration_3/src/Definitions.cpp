@@ -30,12 +30,14 @@ void mainMenu() {
         cout << "===============================" << endl;
         cout << "Your input: " << endl;
         cin >> input;
-        switch (input) {
+        switch (input) { 
             case 1:
+
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(),'\n');
                 nth = subMenu();
                 stats=fibonacciTimer(nth);
+                cout << endl << "Duration of running fibonacci sequences through  "<< nth <<" to " << "0" << endl;
                 printStats(stats);
                 break;
             case 2:
@@ -112,19 +114,18 @@ std::vector<Stats>fibonacciTimer(size_t nthNumber){
     iteration.millisec = durationI/1000;
     iteration.sec = (double)durationI/1000000;
 
-    cout << right << setw(30) << "Nanosecs" << setw(20) << "Microsecs" << setw(20) << "Millisecs" << setw(20) << "Seconds" << endl;
-    cout << recursion.type <<":"<< right << setw(20) << recursion.nanosec << setw(20) << recursion.microsec << setw(20) << recursion.millisec << setw(20) << recursion.sec << endl;
-    cout << iteration.type <<":"<< right << setw(20) << iteration.nanosec << setw(20) << iteration.microsec << setw(20) << iteration.millisec << setw(20) << iteration.sec << endl;
-
-    return {iteration, recursion};
+    return {recursion, iteration};
 }
 
 void printStats(const std::vector<Stats>& stats) {
     vector<Stats> value;
-    Stats recursion = Stats(), iteration = Stats();
-    cout << "test" << endl;
-    for (const Stats &e : stats)
-        std::cout << e.type << std::endl;
+    cout << "==========================================================================================" << endl;
+    cout << right << setw(25) << "Nanosecs" << setw(15) << "Microsecs" << setw(15) << "Millisecs" << setw(15) << "Seconds" << endl;
+    for (const Stats &stat : stats) {
+        cout << stat.type <<":"<< right << setw(15) << stat.nanosec << setw(15) << stat.microsec << setw(15) << stat.millisec << setw(15) << stat.sec << endl;
+    }
+    cout << "==========================================================================================" << endl;
+
 
 }
 
