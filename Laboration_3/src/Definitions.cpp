@@ -19,7 +19,7 @@ long_type fibonacciRecursion(size_t nthNumber) {
 void mainMenu() {
     bool igen = true;
     size_t nth=0;
-    vector <Stats> stats;
+    vector<Stats> stats;
     do {
         int input=0;
         cout << endl;
@@ -52,7 +52,7 @@ void mainMenu() {
 }
 
 size_t subMenu(){
-    bool igen = true;
+    bool igen;
     size_t nth=0;
     do {
         cout << "Select n'th number to find (integer): " << endl;
@@ -73,7 +73,6 @@ size_t subMenu(){
 std::vector<Stats>fibonacciTimer(size_t nthNumber){
     Stats recursion=Stats(), iteration=Stats();
     size_t nthTemp = nthNumber, nth=0;
-    string type;
     auto timeStartR = std::chrono::high_resolution_clock::now();
     int i=5;
     do{
@@ -88,7 +87,11 @@ std::vector<Stats>fibonacciTimer(size_t nthNumber){
     }while(nth!=0);
     auto timeEndR = std::chrono::high_resolution_clock::now();
     long_type durationR = std::chrono::duration_cast<std::chrono::microseconds>(timeEndR - timeStartR ).count();
+    recursion.nanosec = durationR*1000;
     recursion.microsec = durationR;
+    recursion.millisec = durationR/1000;
+    recursion.sec = (double)durationR/1000000;
+
     nthTemp=nthNumber;
     auto timeStartI = std::chrono::high_resolution_clock::now();
     i=5;
@@ -113,15 +116,19 @@ std::vector<Stats>fibonacciTimer(size_t nthNumber){
     cout << recursion.type <<":"<< right << setw(20) << recursion.nanosec << setw(20) << recursion.microsec << setw(20) << recursion.millisec << setw(20) << recursion.sec << endl;
     cout << iteration.type <<":"<< right << setw(20) << iteration.nanosec << setw(20) << iteration.microsec << setw(20) << iteration.millisec << setw(20) << iteration.sec << endl;
 
-
     return {iteration, recursion};
 }
 
-void printStats(const std::vector<Stats>& stats){
+void printStats(const std::vector<Stats>& stats) {
+    vector<Stats> value;
+    Stats recursion = Stats(), iteration = Stats();
+    cout << "test" << endl;
+    for (const Stats &e : stats)
+        std::cout << e.type << std::endl;
 
 }
 
-void writeToFile(const Stats& stats){
+    void writeToFile(const Stats& stats){
 
-}
+    }
 
