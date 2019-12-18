@@ -18,9 +18,11 @@ long_type fibonacciRecursion(size_t nthNumber) {
 }
 
 void mainMenu() {
-    bool loop = true;
-    size_t nth=0;
+    bool loop = true, sant=true;
+    size_t nth = 0;
+    char c;
     vector<Stats> stats;
+    while (sant) {
     do {
         textMenu();
         int input = 0;
@@ -36,6 +38,19 @@ void mainMenu() {
                      << nth << " to " << "0" << endl;
                 printStats(stats);
                 //writeToFile(stats);
+                cout << "Do you want to measure again? (Y/N)" << endl;
+                do {
+                    cin >> c;
+                    c=toupper(c);
+                    if (c == 'Y')
+                        sant = true;
+                    else if(c == 'N') {
+                        sant = false;
+                        loop = false;
+                    }
+                    else
+                        cout << "Wrong input. Y(Yes) or N(No) only " << endl;
+                }while(c!='N' && c!='Y');
                 break;
             case 2:
                 cin.clear();
@@ -47,6 +62,9 @@ void mainMenu() {
             cout << "fel input" << endl;
         input = 0;
     } while (loop);
+}
+
+
 
 }
 
@@ -115,13 +133,12 @@ std::vector<Stats>fibonacciTimer(size_t nthNumber){
 }
 
 void printStats(const std::vector<Stats>& stats) {
-    vector<Stats> value;
     cout << "==========================================================================================" << endl;
     cout << right << setw(25) << "Nanosecs" << setw(15) << "Microsecs" << setw(15) << "Millisecs" << setw(15) << "Seconds" << endl;
     for (const Stats &stat : stats) {
         cout << stat.type <<":"<< right << setw(15) << stat.nanosec << setw(15) << stat.microsec << setw(15) << stat.millisec << setw(15) << stat.sec << endl;
     }
-    cout << "==========================================================================================" << endl;
+    cout << "==========================================================================================" << endl <<endl;
 }
 
 void writeToFile(const Stats& stats) {
