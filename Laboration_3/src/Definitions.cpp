@@ -37,7 +37,7 @@ void mainMenu() {
                      << "Duration of running fibonacci sequences through  "
                      << nth << " to " << "0" << endl;
                 printStats(stats);
-                //writeToFile(stats);
+                writeToFile(stats[0]);
                 cout << "Do you want to measure again? (Y/N)" << endl;
                 do {
                     cin >> c;
@@ -111,7 +111,7 @@ std::vector<Stats>fibonacciTimer(size_t nthNumber){
         recursion.values.push_back(nth);
         if (i==5){
             cout << setw(5) << left << "Recursions " << nthTemp << "'th value: " << setw(10) << right << nth << endl;
-            i=0; 
+            i=0;
         }
         nthTemp--, i++;
     }while(nth!=0);
