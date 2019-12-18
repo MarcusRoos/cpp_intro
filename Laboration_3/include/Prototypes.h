@@ -19,5 +19,6 @@ void writeToFile(const Stats& stats);
 
 void mainMenu();
 size_t subMenu();
+void textMenu();
 
 #endif //DT018G_PROTOTYPES_H

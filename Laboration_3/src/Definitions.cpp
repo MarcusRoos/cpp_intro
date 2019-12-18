@@ -1,3 +1,4 @@
+#include <iterator>
 #include "Prototypes.h"
 
 long_type fibonacciIteration(size_t nthNumber) {
@@ -17,40 +18,36 @@ long_type fibonacciRecursion(size_t nthNumber) {
 }
 
 void mainMenu() {
-    bool igen = true;
+    bool loop = true;
     size_t nth=0;
     vector<Stats> stats;
     do {
-        int input=0;
-        cout << endl;
-        cout << "FIBONACCI SEQUENCE MEASUREMENTS" << endl;
-        cout << "===============================" << endl;
-        cout << " 1. Run Measurements" << endl;
-        cout << " 2. Exit" << endl;
-        cout << "===============================" << endl;
-        cout << "Your input: " << endl;
+        textMenu();
+        int input = 0;
         cin >> input;
-        switch (input) { 
+        switch (input) {
             case 1:
-
                 cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 nth = subMenu();
-                stats=fibonacciTimer(nth);
-                cout << endl << "Duration of running fibonacci sequences through  "<< nth <<" to " << "0" << endl;
+                stats = fibonacciTimer(nth);
+                cout << endl
+                     << "Duration of running fibonacci sequences through  "
+                     << nth << " to " << "0" << endl;
                 printStats(stats);
+                //writeToFile(stats);
                 break;
             case 2:
                 cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(),'\n');
-                igen = false;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                loop = false;
                 break;
         }
         if (input != 1 && input != 2)
             cout << "fel input" << endl;
         input = 0;
+    } while (loop);
 
-    } while (igen);
 }
 
 size_t subMenu(){
@@ -79,8 +76,8 @@ std::vector<Stats>fibonacciTimer(size_t nthNumber){
     int i=5;
     do{
         nth = fibonacciRecursion(nthTemp);
-        recursion.values.push_back(nth);
         recursion.type="Recursion";
+        recursion.values.push_back(nth);
         if (i==5){
             cout << setw(5) << left << "Recursions " << nthTemp << "'th value: " << setw(10) << right << nth << endl;
             i=0;
@@ -93,14 +90,14 @@ std::vector<Stats>fibonacciTimer(size_t nthNumber){
     recursion.microsec = durationR;
     recursion.millisec = durationR/1000;
     recursion.sec = (double)durationR/1000000;
-
+    cout << endl;
     nthTemp=nthNumber;
     auto timeStartI = std::chrono::high_resolution_clock::now();
     i=5;
     do{
         nth = fibonacciIteration(nthTemp);
-        iteration.values.push_back(nth);
         iteration.type="Iteration";
+        iteration.values.push_back(nth);
         if (i==5){
             cout << setw(5) << left << "Iterations " << nthTemp << "'th value: " << setw(10) << right << nth << endl;
             i=0;
@@ -125,11 +122,26 @@ void printStats(const std::vector<Stats>& stats) {
         cout << stat.type <<":"<< right << setw(15) << stat.nanosec << setw(15) << stat.microsec << setw(15) << stat.millisec << setw(15) << stat.sec << endl;
     }
     cout << "==========================================================================================" << endl;
-
-
 }
 
-    void writeToFile(const Stats& stats){
+void writeToFile(const Stats& stats) {
+    fstream randFile;
+    string fileName = "Iteration.txt";
+    randFile.open(fileName, ios::out);
+    if (randFile.is_open()) {
+        for (size_t i = 0; i < stats.values.size(); i++) {
+            randFile << stats.values[i];
+            if (i < (stats.values.size() - 1))
+                randFile << endl;
+        }
 
     }
-
+}
+void textMenu(){
+    cout << "FIBONACCI SEQUENCE MEASUREMENTS" << endl;
+    cout << "===============================" << endl;
+    cout << " 1. Run Measurements" << endl;
+    cout << " 2. Exit" << endl;
+    cout << "===============================" << endl;
+    cout << "Your input: " << endl;
+}
