@@ -50,6 +50,8 @@ void mainMenu() {
                     }
                     else
                         cout << "Wrong input. Y(Yes) or N(No) only " << endl;
+                    cin.clear();
+                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 }while(c!='N' && c!='Y');
                 break;
             case 2:
