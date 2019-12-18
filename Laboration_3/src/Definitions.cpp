@@ -60,9 +60,12 @@ void mainMenu() {
                 loop = false;
                 break;
         }
-        if (input != 1 && input != 2)
+        if (input != 1 && input != 2) {
             cout << "fel input" << endl;
-        input = 0;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            input = 0;
+        }
     } while (loop);
 }
 
@@ -72,18 +75,26 @@ void mainMenu() {
 
 size_t subMenu(){
     bool igen;
-    size_t nth=0;
+    int nth=0;
+    cout << "WARNING: Large numbers may take a long time to process." << endl;
+    cout << "Select n'th number to find (integer): " << endl;
     do {
-        cout << "Select n'th number to find (integer): " << endl;
         cin >> nth;
-        if (cin.fail()){
-            cin.clear();
-            cin.ignore();
-            cout << "not an int" << endl;
-            igen = true;
+        while (nth<0){
+            nth='n';
+            cout << "Cannot process negative integers, please enter a positive number. " << endl;
+            cin >> nth;
         }
-        else
-            igen = false;
+
+            if (cin.fail()) {
+                cout << "You did not enter an int, please enter an integer."
+                     << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                igen = true;
+            } else
+                igen = false;
+
     }while (igen);
 
     return nth;
