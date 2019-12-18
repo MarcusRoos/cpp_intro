@@ -164,7 +164,6 @@ void writeToFile(const Stats& stats) {
             if (i < (stats.values.size() - 1))
                 randFile << endl;
         }
-
     }
 }
 void textMenu(){
