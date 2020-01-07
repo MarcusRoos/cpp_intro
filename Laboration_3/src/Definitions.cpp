@@ -58,6 +58,7 @@ void mainMenu() {
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 loop = false;
+                sant = false;
                 break;
         }
         if (input != 1 && input != 2) {
@@ -100,50 +101,54 @@ size_t subMenu(){
     return nth;
 }
 
-std::vector<Stats>fibonacciTimer(size_t nthNumber){
-    Stats recursion=Stats(), iteration=Stats();
-    size_t nthTemp = nthNumber, nth=0;
-    auto timeStartR = std::chrono::high_resolution_clock::now();
-    int i=5;
-    do{
-        nth = fibonacciRecursion(nthTemp);
-        recursion.type="Recursion";
-        recursion.values.push_back(nth);
-        if (i==5){
-            cout << setw(5) << left << "Recursions " << nthTemp << "'th value: " << setw(10) << right << nth << endl;
-            i=0;
-        }
-        nthTemp--, i++;
-    }while(nth!=0);
-    auto timeEndR = std::chrono::high_resolution_clock::now();
-    long_type durationR = std::chrono::duration_cast<std::chrono::microseconds>(timeEndR - timeStartR ).count();
-    recursion.nanosec = durationR*1000;
-    recursion.microsec = durationR;
-    recursion.millisec = durationR/1000;
-    recursion.sec = (double)durationR/1000000;
-    cout << endl;
-    nthTemp=nthNumber;
-    auto timeStartI = std::chrono::high_resolution_clock::now();
-    i=5;
-    do{
-        nth = fibonacciIteration(nthTemp);
-        iteration.type="Iteration";
-        iteration.values.push_back(nth);
-        if (i==5){
-            cout << setw(5) << left << "Iterations " << nthTemp << "'th value: " << setw(10) << right << nth << endl;
-            i=0;
-        }
-        nthTemp--, i++;
-    }while(nth!=0);
-    auto timeEndI = std::chrono::high_resolution_clock::now();
-    long_type durationI = std::chrono::duration_cast<std::chrono::microseconds>(timeEndI - timeStartI ).count();
-    iteration.nanosec = durationI*1000;
-    iteration.microsec = durationI;
-    iteration.millisec = durationI/1000;
-    iteration.sec = (double)durationI/1000000;
+std::vector<Stats>fibonacciTimer(size_t nthNumber) {
+    vector<Stats> testVec{Stats(), Stats()};
+    Stats recursion = testVec[0], iteration = testVec[1];
+    size_t nthTemp = nthNumber, nth = 0, i = 5, g=0;
+    testVec[0].type = "Iteration", testVec[1].type = "Recursion";
 
-    return {recursion, iteration};
-}
+    while(g<=1) {
+        auto timeStart = std::chrono::high_resolution_clock::now();
+        do {
+            if (g == 0) {
+            nth = fibonacciIteration(nthTemp);
+            testVec[g].values.push_back(nth);
+             }
+            else if (g == 1){
+                nth = fibonacciRecursion(nthTemp);
+                testVec[g].values.push_back(nth);
+            }
+            if (i == 5) {
+                if (nthTemp < 10)
+                    cout << testVec[g].type << " " << nthTemp << "'th value: "
+                         << setw(17)
+                         << nth << right << endl;
+                else
+                    cout << testVec[g].type << " " << nthTemp << "'th value: "
+                         << setw(16)
+                         << nth << right << endl;
+                i = 0;
+            }
+            nthTemp--, i++;
+        } while (nth != 0);
+        auto timeEnd = std::chrono::high_resolution_clock::now();
+            testVec[g].nanosec = std::chrono::duration_cast<std::chrono::nanoseconds>
+                    (timeEnd - timeStart).count();
+            testVec[g].microsec = std::chrono::duration_cast<std::chrono::microseconds>
+                    (timeEnd - timeStart).count();
+            testVec[g].millisec = std::chrono::duration_cast<std::chrono::milliseconds>
+                    (timeEnd - timeStart).count();
+            testVec[g].sec = (double) testVec[g].millisec / 1000;
+        g++;
+        cout << endl;
+        i = 5;
+        nthTemp = nthNumber;
+    }
+
+
+    return {testVec};
+
+} // end func fibonacciTimer
 
 void printStats(const std::vector<Stats>& stats) {
     cout << "==========================================================================================" << endl;
