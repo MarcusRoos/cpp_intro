@@ -1,0 +1,3 @@
+C:/Users/Satan/Desktop/Skola/Universitet/Avklarade_kurser/Intro C++/master/NyLabb/Project/cmake-build-debug/CMakeFiles/Project-Project.dir
+C:/Users/Satan/Desktop/Skola/Universitet/Avklarade_kurser/Intro C++/master/NyLabb/Project/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Satan/Desktop/Skola/Universitet/Avklarade_kurser/Intro C++/master/NyLabb/Project/cmake-build-debug/CMakeFiles/rebuild_cache.dir
